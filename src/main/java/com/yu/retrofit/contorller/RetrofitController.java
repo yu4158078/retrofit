@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.yu.retrofit.service.RetrofitService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,11 @@ public class RetrofitController {
     @Autowired
     RetrofitService retrofitService;
 
+    @GetMapping("/get/{name}")
+    public String get(@PathVariable(value = "name") String name) throws IOException {
+        return JSON.toJSONString(retrofitService.get(name).execute().body());
+    }
+
     @PostMapping("/post")
     public String post(@RequestBody Map<String, Object> x) throws IOException {
 
@@ -47,11 +53,11 @@ public class RetrofitController {
         return JSON.toJSONString(retrofitService.post(x).execute().body());
     }
 
-    @GetMapping("/get/{name}")
-    public String get(@PathVariable(value = "name") String name) throws IOException {
-        return JSON.toJSONString(retrofitService.get(name).execute().body());
+    @PostMapping("/post/{name}")
+    public String query(@PathVariable(value = "name") String name) throws IOException {
+        return JSON.toJSONString(retrofitService.query(name).execute().body());
     }
-
+    
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable(value = "id") String id) throws IOException {
         return JSON.toJSONString(retrofitService.delete(id).execute().body());
@@ -100,11 +106,23 @@ public class RetrofitController {
             throws IOException {
         Response<ResponseBody> execute = retrofitService.form(ImmutableMap.of("name", name, "userId", userId))
                 .execute();
-        // 非200  在errorBody中
-        if(!execute.isSuccessful()){
+        // 非200 在errorBody中
+        if (!execute.isSuccessful()) {
             return execute.errorBody().string();
-        }else {
+        } else {
             return JSON.toJSONString(execute.body());
         }
     }
+
+    @PostMapping("/queryMap")
+    public String queryMap(@RequestBody Map<String, Object> queryMap) throws IOException {
+        return JSON.toJSONString(retrofitService.queryMap(queryMap).execute().body());
+    }
+
+    @PostMapping("/mutil/{path}")
+    public String mutil(@PathVariable("path") String path, @RequestParam("param") String param,
+            @RequestBody Map<String, Object> queryMap) throws IOException {
+        return JSON.toJSONString(retrofitService.mutil(path, param, queryMap).execute().body());
+    }
+
 }

@@ -1,9 +1,5 @@
 # retrofit demo
 
-|Author|yu|
-|---|---
-|E-mail|506909808@qq.com
-
 # 涉及技术
 springboot + retrofit + swegger2
 
@@ -16,7 +12,7 @@ Retrofit is a REST Client for Java and Android. It makes it relatively easy to r
 Retrofit是Java和Android的REST客户端。 它使通过基于REST的webService和JSON（或其他结构化数据）变得相对容易。 在Retrofit中，您可以配置用于数据序列化的转换器。 通常对于JSON使用GSon，但您可以添加自定义转换器来处理XML或其他协议。 Retrofit使用OkHttp库进行HTTP请求。
 
 
-* retrofit 更类似于 spring 的restTemplate 对已有网络请求libary 再次封装
+* retrofit 更类似于 spring 的restTemplate 对已有网络请求libary 再次封装,更像是一种增强类似lombok
 
 * retrofit 基于okHttp ，这两个libary 都是Square Open Source 维护，对于已经使用okHttp的项目可以平滑迁移
 
@@ -116,7 +112,7 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
     .addConverterFactory(JacksonConverterFactory.create(mapper)).client(okHttpClient).build();
 ```
 
-### Retrofit 注解
+### Retrofit 方法注解
 	
 | 注解代码 | 请求格式  | 
 | :------------ |:---------------:| 
@@ -133,13 +129,13 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
 
 | 注解 | 描述 | 使用 | 结果url |
 | :------------ |:---------------:|:---------------:|:---------------:| 
-|@Path |restful 替换路径中{}，和Spring @PathVariable一样 |   ```Java @GET("/server/get/{name}") Call<Map<String, Object>> get(@Path("name") String name);```|/server/get/name|
-|@Query |url中拼接参数 在?后 |   ```Java   @POST("/server/query") Call<Map<String, Object>> query(@Query("name") String req); ```|/server/queryMap?name=req|
+|@Path |restful 替换路径中{}，和Spring @PathVariable一样 |   ```Java @GET("/server/get/{name}") Call<Map<String, Object>> get(@Path("name") String name);```|Content-Type: text/plain;charset=UTF-8 GET /server/get/name|
+|@Query |url中拼接参数 在?后 |   ```Java   @POST("/server/query") Call<Map<String, Object>> query(@Query("name") String req); ```|http://localhost:8080/server/query?name=111 |
 |@QueryMap：|url中拼接参数 在?后| ```Java  @POST("/server/queryMap") Call<Map<String, Object>> queryMap(@QueryMap Map<String, Object> req); ```|/server/queryMap?a=111&b=222|
-|@FormUrlEncoded @FieldMap @Field|用表单数据提交 @FieldMap  form 多参数，@Filed 单参数|```Java @FormUrlEncoded @POST("/server/form") Call<ResponseBody> form(@FieldMap Map<String, Object> req); ```|/server/form param: key1 = value1,key2 = value2 |
+|@FormUrlEncoded @FieldMap @Field|用表单数据提交 @FieldMap  form 多参数，@Filed 单参数|```Java @FormUrlEncoded @POST("/server/form") Call<ResponseBody> form(@FieldMap Map<String, Object> req); ```|Content-Type: application/x-www-form-urlencoded POST /server/form?key1=value1&key2=value2 |
 |@Multipart @Part  @PartMap|@Multipart 表示文件传输 和 @Part(单文件)、@PartMap(多文件) 搭配使用 |```Java     @Multipart @POST("/server/upload") Call<ResponseBody> upload(@Part MultipartBody.Part body);```| 以流的方式传输文件|
 |@Body| post 请求中body 是json |```Java   @POST("/server/post") Call<Map<String, Object>> header(@Body Map<String, Object> req); ```| /server/post,body {"name":"yu"}|
-
+| ||```Java     @POST("/server/mutil/{path}") Call<Map<String, Object>> mutil(@Path("path") String path, @Query("name") String req, @Body Map<String,Object> map); ```| Content-Type: application/json; charset=UTF-8 POST http://localhost:8080/server/mutil/123?name=321 {"test":"123"}|
 
 ## 相关资料：
 

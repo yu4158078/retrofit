@@ -23,7 +23,7 @@ public class ExceptionInterceptor {
             log.info("IO异常", e);
             return e.getMessage();
         } else {
-            log.info("请求石嘴山Exception异常", e);
+            log.info("请求Exception异常", e);
             return e.getMessage();
         }
     }

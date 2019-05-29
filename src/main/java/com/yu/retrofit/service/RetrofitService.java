@@ -2,6 +2,8 @@ package com.yu.retrofit.service;
 
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestBody;
+
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -96,5 +98,13 @@ public interface RetrofitService {
      */
     @POST("/server/query")
     Call<Map<String, Object>> query(@Query("name") String req);
+
+    /**
+     *  Content-Type: application/json; charset=UTF-8 POST http://localhost:8080/server/mutil/123?name=321 {"test":"123"}
+     * @param req
+     * @return
+     */
+    @POST("/server/mutil/{path}")
+    Call<Map<String, Object>> mutil(@Path("path") String path, @Query("name") String req, @Body Map<String,Object> map);
 
 }
