@@ -1,30 +1,35 @@
 # retrofit demo
-springboot + retrofit + swegger2
-测试地址：
-http://localhost:8080/doc.html
 
-#Retrofit简介
+|Author|yu|
+|---|---
+|E-mail|506909808@qq.com
+
+# 使用技术
+springboot + retrofit + swegger2
+测试地址：http://localhost:8080/doc.html
+
+# Retrofit简介
 
 Retrofit is a REST Client for Java and Android. It makes it relatively easy to retrieve and upload JSON (or other structured data) via a REST based webservice. In Retrofit you configure which converter is used for the data serialization. Typically for JSON you use GSon, but you can add custom converters to process XML or other protocols. Retrofit uses the OkHttp library for HTTP requests.
 
 Retrofit是Java和Android的REST客户端。 它使通过基于REST的webService和JSON（或其他结构化数据）变得相对容易。 在Retrofit中，您可以配置用于数据序列化的转换器。 通常对于JSON使用GSon，但您可以添加自定义转换器来处理XML或其他协议。 Retrofit使用OkHttp库进行HTTP请求。
 
 
-1.retrofit 更类似于 spring 的restTemplate 对已有网络请求libary 再次封装
+* retrofit 更类似于 spring 的restTemplate 对已有网络请求libary 再次封装
 
-2.retrofit 基于okHttp ，这两个libary 都是Square Open Source 维护，对于已经使用okHttp的项目可以平滑迁移
+* retrofit 基于okHttp ，这两个libary 都是Square Open Source 维护，对于已经使用okHttp的项目可以平滑迁移
 
-3.retrofit 诞生的意义：把Url 和 http请求解耦、打散，针对接口编程、简化代码、增加易读性
+* retrofit 诞生的意义：把Url 和 http请求解耦、打散，针对接口编程、简化代码、增加易读性
 
-#OkHttp简介
+# OkHttp简介
 
 OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http client libary，常见于安卓和java平台
 
 支持httpClient 已有的特性，同步请求、异步回调请求、http2.0、https、自动重试等
 
-#retrofit的特性
+# retrofit的特性
 
-1.支持多种反序列化工具：
+1. 支持多种反序列化工具：
 
     To convert to and from JSON:
 
@@ -82,7 +87,7 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
 
 ### retrofit初始化
     
-    
+```Java 
     // Retrofit 依赖okHttp 设置okHttp 参数
     
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -107,35 +112,31 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
     Retrofit retrofit = new Retrofit.Builder().baseUrl(basicUrl)
     
     .addConverterFactory(JacksonConverterFactory.create(mapper)).client(okHttpClient).build();
-
+```
 
 ### Retrofit 注解
-注解代码	请求格式
-
-@GET	GET请求
-
-@POST	POST请求
-
-@DELETE	DELETE请求
-
-@HEAD	HEAD请求
-
-@OPTIONS	OPTIONS请求
-
-@PATCH	PATCH请求
-
-@Headers
+	
+| 注解代码 | 请求格式  | 
+| :------------ |:---------------:| 
+| @GET          |GET请求 |
+| @POST      | POST请求        |
+| @DELETE | DELETE请求        |
+|@HEAD | HEAD请求|
+|@OPTIONS	|OPTIONS请求|
+|@PATCH	| PATCH请求|
+|@Headers|Head 头信息|
 	
 
-### 添加请求头
-	
-    @Path
-    restful 替换路径中{}，和Spring @PathVariable一样
+### 常用参数注解
+
+| 注解 | 描述 | 使用 |
+| :------------ |:---------------:|:---------------:|  
+|@Path |restful 替换路径中{}，和Spring @PathVariable一样 |   ```Java @GET("/server/get/{name}") Call<Map<String, Object>> get(@Path("name") String name);/server/get/name```|
+    
+| | |   ```Java  ```|
+
         
     
-    @GET("/server/get/{name}")
-    
-    Call<Map<String, Object>> get(@Path("name") String name);/server/get/name
     
     @Query
     url中拼接参数 在?后
@@ -178,6 +179,16 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
     Call<Map<String, Object>> header(@Body Map<String, Object> req);
     
     body=req.toJsonString
-    相关资料：
 
-retrofit官方地址、github地址、retrofit学习视频、okhttp官方地址
+
+
+
+##相关资料：
+
+[retrofit官方地址](https://square.github.io/retrofit/)
+
+[github地址](https://github.com/square/retrofit)
+
+[retrofit学习视频](https://futurestud.io/tutorials/retrofit-getting-started-and-android-client)
+
+[okhttp官方地址](https://square.github.io/okhttp/)
