@@ -4,8 +4,9 @@
 |---|---
 |E-mail|506909808@qq.com
 
-# 使用技术
+# 涉及技术
 springboot + retrofit + swegger2
+
 测试地址：http://localhost:8080/doc.html
 
 # Retrofit简介
@@ -49,16 +50,17 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
 
         Simple XML: com.squareup.retrofit:converter-simplexml
 
-2.支持自定义反序列化
+2. 支持自定义反序列化
 
-3.支持请求适配器（java 平台暂时没用 ，andorid-RxJava）
+3. 支持请求适配器（java 平台暂时没用 ，andorid-RxJava）
 
-4.解耦
-为什么使用retrofit
+4. 解耦
 
-1.基于接口编程，解耦，各个http请求之间无关联。修改影响小、容易扩展
+# 为什么使用retrofit
 
-2.基于目前平台的现状:都使用不同的http网络请求封装，可读性一般、不方便后期维护
+1. 基于接口编程，解耦，各个http请求之间无关联。修改影响小、容易扩展
+
+2. 基于目前平台的现状:都使用不同的http网络请求封装，可读性一般、不方便后期维护
 
 
 ## Retrofit使用
@@ -139,7 +141,7 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
 |@Body| post 请求中body 是json |```Java   @POST("/server/post") Call<Map<String, Object>> header(@Body Map<String, Object> req); ```| /server/post,body {"name":"yu"}|
 
 
-##相关资料：
+## 相关资料：
 
 [retrofit官方地址](https://square.github.io/retrofit/)
 
