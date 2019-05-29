@@ -58,7 +58,7 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
 
 1.基于接口编程，解耦，各个http请求之间无关联。修改影响小、容易扩展
 
-2.基于目前资金平台的现状:众安、集成、云信、石嘴山，都使用不同的http网络请求封装，可读性一般、不方便后期维护
+2.基于目前平台的现状:都使用不同的http网络请求封装，可读性一般、不方便后期维护
 
 
 ## Retrofit使用
