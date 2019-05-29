@@ -63,7 +63,7 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
 
 ## Retrofit使用
 ### maven依赖
-
+```xml
     <dependency>
      <groupId>com.squareup.retrofit2</groupId>
      <artifactId>retrofit</artifactId>
@@ -84,7 +84,7 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
      <artifactId>converter-jackson</artifactId>
      <version>2.5.0</version>
     </dependency>
-
+``` 
 ### retrofit初始化
     
 ```Java 
@@ -135,8 +135,10 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
 |@Query |url中拼接参数 在?后 |   ```Java   @POST("/server/query") Call<Map<String, Object>> query(@Query("name") String req); ```|/server/queryMap?name=req|
 |@QueryMap：|url中拼接参数 在?后| ```Java  @POST("/server/queryMap") Call<Map<String, Object>> queryMap(@QueryMap Map<String, Object> req); ```|/server/queryMap?a=111&b=222|
 |@FormUrlEncoded @FieldMap @Field|用表单数据提交 @FieldMap  form 多参数，@Filed 单参数|```Java @FormUrlEncoded @POST("/server/form") Call<ResponseBody> form(@FieldMap Map<String, Object> req); ```|/server/form param: key1 = value1,key2 = value2 |
-|@Multipart @Part  @PartMap|@Multipart 表示文件传输 和 @Part、@PartMap 搭配使用 |```Java     @Multipart @POST("/server/upload") Call<ResponseBody> upload(@Part MultipartBody.Part body);```| 以流的方式传输文件|
+|@Multipart @Part  @PartMap|@Multipart 表示文件传输 和 @Part(单文件)、@PartMap(多文件) 搭配使用 |```Java     @Multipart @POST("/server/upload") Call<ResponseBody> upload(@Part MultipartBody.Part body);```| 以流的方式传输文件|
 |@Body| post 请求中body 是json |```Java   @POST("/server/post") Call<Map<String, Object>> header(@Body Map<String, Object> req); ```| /server/post,body {"name":"yu"}|
+
+
 ##相关资料：
 
 [retrofit官方地址](https://square.github.io/retrofit/)
