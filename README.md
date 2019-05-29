@@ -129,60 +129,14 @@ OkHttp 是类似于 jdk HttpUrlConnection、apache httpclient 的网络http clie
 
 ### 常用参数注解
 
-| 注解 | 描述 | 使用 |
-| :------------ |:---------------:|:---------------:|  
-|@Path |restful 替换路径中{}，和Spring @PathVariable一样 |   ```Java @GET("/server/get/{name}") Call<Map<String, Object>> get(@Path("name") String name);/server/get/name```|
-    
-| | |   ```Java  ```|
-
-        
-    
-    
-    @Query
-    url中拼接参数 在?后
-    @POST("/server/query")
-    Call<Map<String, Object>> query(@Query("name") String req);/server/queryMap?name=req
-    
-    @QueryMap：
-    url中拼接参数 在?后
-    @POST("/server/queryMap")
-    
-    Call<Map<String, Object>> queryMap(@QueryMap Map<String, Object> req);/server/queryMap?a=111&b=222
-
-    @FormUrlEncoded
-    用表单数据提交
-    
-    @FieldMap
-    form请求多参数 和@FormUrlEncoded 一起使用
-    
-    @Field
-    from 请求参数 和@FormUrlEncoded 一起使用
-    
-    @Multipart
-    文件上传 和 @Part 联合使用
-    
-    @Part
-    单文件上传和Spring MutilPart
-    
-    @PartMap
-    多文件上传和Spring List<MutilPart>
-	
-    
-    @Body
-        
-    
-    post json 和spring @RequestBody
-        
-    
-    @POST("/server/post")
-    
-    Call<Map<String, Object>> header(@Body Map<String, Object> req);
-    
-    body=req.toJsonString
-
-
-
-
+| 注解 | 描述 | 使用 | 结果url |
+| :------------ |:---------------:|:---------------:|:---------------:| 
+|@Path |restful 替换路径中{}，和Spring @PathVariable一样 |   ```Java @GET("/server/get/{name}") Call<Map<String, Object>> get(@Path("name") String name);```|/server/get/name|
+|@Query |url中拼接参数 在?后 |   ```Java   @POST("/server/query") Call<Map<String, Object>> query(@Query("name") String req); ```|/server/queryMap?name=req|
+|@QueryMap：|url中拼接参数 在?后| ```Java  @POST("/server/queryMap") Call<Map<String, Object>> queryMap(@QueryMap Map<String, Object> req); ```|/server/queryMap?a=111&b=222|
+|@FormUrlEncoded @FieldMap @Field|用表单数据提交 @FieldMap  form 多参数，@Filed 单参数|```Java @FormUrlEncoded @POST("/server/form") Call<ResponseBody> form(@FieldMap Map<String, Object> req); ```|/server/form param: key1 = value1,key2 = value2 |
+|@Multipart @Part  @PartMap|@Multipart 表示文件传输 和 @Part、@PartMap 搭配使用 |```Java     @Multipart @POST("/server/upload") Call<ResponseBody> upload(@Part MultipartBody.Part body);```| 以流的方式传输文件|
+|@Body| post 请求中body 是json |```Java   @POST("/server/post") Call<Map<String, Object>> header(@Body Map<String, Object> req); ```| /server/post,body {"name":"yu"}|
 ##相关资料：
 
 [retrofit官方地址](https://square.github.io/retrofit/)
