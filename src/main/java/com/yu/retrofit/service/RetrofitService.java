@@ -21,6 +21,8 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /**
  * @author yushijun
@@ -106,5 +108,10 @@ public interface RetrofitService {
      */
     @POST("/server/mutil/{path}")
     Call<Map<String, Object>> mutil(@Path("path") String path, @Query("name") String req, @Body Map<String,Object> map);
+
+	// @Url String url
+    @GET("/upload/2019/04/t9kno1mgd4innplofv31elfs5c.png")
+    @Streaming
+    Call<ResponseBody> download();
 
 }

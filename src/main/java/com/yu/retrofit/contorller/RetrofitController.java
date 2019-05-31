@@ -27,6 +27,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.GET;
 
 /**
  * @author yushijun
@@ -123,6 +124,11 @@ public class RetrofitController {
     public String mutil(@PathVariable("path") String path, @RequestParam("param") String param,
             @RequestBody Map<String, Object> queryMap) throws IOException {
         return JSON.toJSONString(retrofitService.mutil(path, param, queryMap).execute().body());
+    }
+
+    @PostMapping("/download")
+    public String download() throws IOException {
+        return retrofitService.download().execute().body().string();
     }
 
 }
